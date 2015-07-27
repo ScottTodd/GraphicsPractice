@@ -34,3 +34,5 @@ bin/
 out/
 opengl-tutorial/external/
 opengl-tutorial/*.exe
+src/external/
+src/*.exe
