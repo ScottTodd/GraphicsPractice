@@ -59,14 +59,13 @@ add_executable(practice
     main.cpp
     common/shader.cpp
     common/shader.hpp
-    common/controls.cpp
-    common/controls.hpp
     common/texture.cpp
     common/texture.hpp
     common/objloader.cpp
     common/objloader.hpp
     common/vboindexer.cpp
     common/vboindexer.hpp
+    scene.cpp
 )
 target_link_libraries(practice
     ${ALL_LIBS}
@@ -74,10 +73,6 @@ target_link_libraries(practice
 # Xcode and Visual working directories
 set_target_properties(practice PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/")
 create_target_launcher(practice WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/")
-
-
-
-
 
 
 
@@ -94,4 +89,3 @@ add_custom_command(
 elseif (${CMAKE_GENERATOR} MATCHES "Xcode" )
 
 endif (NOT ${CMAKE_GENERATOR} MATCHES "Xcode" )
-
