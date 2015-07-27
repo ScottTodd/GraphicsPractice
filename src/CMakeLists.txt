@@ -56,7 +56,7 @@ add_definitions(
 )
 
 add_executable(practice
-    main.cpp
+    main.cc
     common/shader.cpp
     common/shader.hpp
     common/texture.cpp
@@ -65,7 +65,7 @@ add_executable(practice
     common/objloader.hpp
     common/vboindexer.cpp
     common/vboindexer.hpp
-    scene.cpp
+    scene.cc
 )
 target_link_libraries(practice
     ${ALL_LIBS}

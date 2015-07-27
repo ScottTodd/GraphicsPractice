@@ -13,7 +13,7 @@
 
 
 Scene::Scene() {
-
+    is_running = false;
 }
 
 bool Scene::Initialize() {
@@ -45,6 +45,8 @@ bool Scene::Initialize() {
 
     // Ensure we can capture the escape key to exit.
     glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
+
+    is_running = true;
 
     return true;
 }
