@@ -66,6 +66,7 @@ add_executable(practice
     common/vboindexer.cpp
     common/vboindexer.hpp
     scene.cc
+    triangle.cc
 )
 target_link_libraries(practice
     ${ALL_LIBS}

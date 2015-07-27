@@ -11,6 +11,8 @@
 
 #include <common/shader.hpp>
 
+#include "triangle.h"
+
 
 Scene::Scene() {
     is_running = false;
@@ -52,6 +54,8 @@ bool Scene::Initialize() {
 }
 
 void Scene::InitializeObjects() {
+    scene_objects.push_back(std::unique_ptr<Renderable>(new Triangle()));
+
     // TODO: Replace all of this with Renderable interface/class, Camera class.
 
     glGenVertexArrays(1, &vertex_array_id);
@@ -97,6 +101,10 @@ void Scene::InitializeObjects() {
 }
 
 void Scene::Cleanup() {
+    for (int i = 0; i < scene_objects.size(); ++i) {
+        scene_objects[i]->Cleanup();
+    }
+
     // Cleanup VBO and shader
     glDeleteBuffers(1, &vertexbuffer);
     glDeleteProgram(program_id);
@@ -107,6 +115,10 @@ void Scene::Cleanup() {
 }
 
 void Scene::Update() {
+    for (int i = 0; i < scene_objects.size(); ++i) {
+        scene_objects[i]->Update();
+    }
+
     // Check if the ESC key was pressed or the window was closed
     is_running = (glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS &&
                   glfwWindowShouldClose(window) == 0);
@@ -115,6 +127,10 @@ void Scene::Update() {
 void Scene::Render() {
     // Clear the screen
     glClear(GL_COLOR_BUFFER_BIT);
+
+    for (int i = 0; i < scene_objects.size(); ++i) {
+        scene_objects[i]->Render();
+    }
 
     // Use our shader
     glUseProgram(program_id);
