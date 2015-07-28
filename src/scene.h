@@ -8,6 +8,7 @@
 #include <glfw3.h>
 #include <glm/glm.hpp>
 
+#include "camera.h"
 #include "renderable.h"
 
 class Scene {
@@ -27,12 +28,12 @@ private:
     GLFWwindow* window;
 
     std::vector<std::unique_ptr<Renderable>> scene_objects;
+    Camera camera;
 
     GLuint program_id;
     GLuint matrix_id;
     GLuint vertexbuffer;
     GLuint vertex_array_id;
-    glm::mat4 mvp;
 };
 
-#endif
+#endif // SCENE_H

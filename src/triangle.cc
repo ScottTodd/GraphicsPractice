@@ -1,7 +1,6 @@
 #include "triangle.h"
 
-#include <iostream>
-
+#include "camera.h"
 
 Triangle::Triangle() {
 
@@ -11,7 +10,7 @@ void Triangle::Update() {
 
 }
 
-void Triangle::Render() {
+void Triangle::Render(Camera camera) {
 
 }
 
