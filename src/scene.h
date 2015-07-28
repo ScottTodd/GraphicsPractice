@@ -26,14 +26,8 @@ public:
 
 private:
     GLFWwindow* window_;
-
     std::vector<std::unique_ptr<Renderable>> scene_objects_;
     Camera camera_;
-
-    GLuint program_id;
-    GLuint matrix_id;
-    GLuint vertexbuffer;
-    GLuint vertex_array_id;
 };
 
 #endif // SCENE_H
