@@ -67,6 +67,7 @@ add_executable(practice
     common/vboindexer.hpp
     scene.cc
     camera.cc
+    material.cc
     triangle.cc
 )
 target_link_libraries(practice

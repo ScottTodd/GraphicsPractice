@@ -31,13 +31,13 @@ bool Scene::Initialize() {
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     // Open a window and create its OpenGL context.
-    window = glfwCreateWindow(1024, 768, "Graphics Practice", NULL, NULL);
-    if(window == NULL){
+    window_ = glfwCreateWindow(1024, 768, "Graphics Practice", NULL, NULL);
+    if(window_ == NULL){
         fprintf(stderr, "Failed to open GLFW window.\n" );
         glfwTerminate();
         return false;
     }
-    glfwMakeContextCurrent(window);
+    glfwMakeContextCurrent(window_);
 
     // Initialize GLEW.
     if (glewInit() != GLEW_OK) {
@@ -46,10 +46,10 @@ bool Scene::Initialize() {
     }
 
     // Ensure we can capture the escape key to exit.
-    glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
+    glfwSetInputMode(window_, GLFW_STICKY_KEYS, GL_TRUE);
 
-    camera = Camera(60.0f, 4.0f / 3.0f, 0.1f, 100.0f,
-                    glm::vec3(0,0,10), glm::vec3(0,0,0), glm::vec3(0,1,0));
+    camera_ = Camera(60.0f, 4.0f / 3.0f, 0.1f, 100.0f,
+                     glm::vec3(0,0,10), glm::vec3(0,0,0), glm::vec3(0,1,0));
 
     is_running = true;
 
@@ -57,92 +57,40 @@ bool Scene::Initialize() {
 }
 
 void Scene::InitializeObjects() {
-    scene_objects.push_back(std::unique_ptr<Renderable>(new Triangle()));
-
-    // TODO: Replace all of this with Renderable interface/class, Camera class.
-
-    glGenVertexArrays(1, &vertex_array_id);
-    glBindVertexArray(vertex_array_id);
-
-    // Create and compile our GLSL program from the shaders
-    program_id = LoadShaders("SimpleTransform.vertexshader",
-                            "SingleColor.fragmentshader" );
-
-    // Get a handle for our "MVP" uniform
-    matrix_id = glGetUniformLocation(program_id, "MVP");
-
-    static const GLfloat g_vertex_buffer_data[] = {
-        -1.0f, -1.0f, 0.0f,
-         1.0f, -1.0f, 0.0f,
-         0.0f,  1.0f, 0.0f,
-    };
-    static const GLushort g_element_buffer_data[] = {0, 1, 2};
-
-    glGenBuffers(1, &vertexbuffer);
-    glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data),
-                 g_vertex_buffer_data, GL_STATIC_DRAW);
+    Material triangle_material = Material("SimpleTransform.vertexshader",
+                                          "SingleColor.fragmentshader");
+    scene_objects_.push_back(std::unique_ptr<Renderable>(new Triangle(
+                             triangle_material)));
 }
 
 void Scene::Cleanup() {
-    for (int i = 0; i < scene_objects.size(); ++i) {
-        scene_objects[i]->Cleanup();
+    for (int i = 0; i < scene_objects_.size(); ++i) {
+        scene_objects_[i]->Cleanup();
     }
-
-    // Cleanup VBO and shader
-    glDeleteBuffers(1, &vertexbuffer);
-    glDeleteProgram(program_id);
-    glDeleteVertexArrays(1, &vertex_array_id);
 
     // Close OpenGL window and terminate GLFW
     glfwTerminate();
 }
 
 void Scene::Update() {
-    for (int i = 0; i < scene_objects.size(); ++i) {
-        scene_objects[i]->Update();
+    for (int i = 0; i < scene_objects_.size(); ++i) {
+        scene_objects_[i]->Update();
     }
 
     // Check if the ESC key was pressed or the window was closed
-    is_running = (glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS &&
-                  glfwWindowShouldClose(window) == 0);
+    is_running = (glfwGetKey(window_, GLFW_KEY_ESCAPE) != GLFW_PRESS &&
+                  glfwWindowShouldClose(window_) == 0);
 }
 
 void Scene::Render() {
     // Clear the screen
     glClear(GL_COLOR_BUFFER_BIT);
 
-    for (int i = 0; i < scene_objects.size(); ++i) {
-        scene_objects[i]->Render(camera);
+    for (int i = 0; i < scene_objects_.size(); ++i) {
+        scene_objects_[i]->Render(camera_);
     }
 
-    // Use our shader
-    glUseProgram(program_id);
-
-    // Send our transformation to the currently bound shader,
-    // in the "MVP" uniform
-    // Model matrix : identity matrix (model will be at the origin)
-    glm::mat4 mvp = camera.TransformModel(glm::mat4(1.0f));
-    glUniformMatrix4fv(matrix_id, 1, GL_FALSE, &mvp[0][0]);
-
-    // 1st attribute buffer : vertices
-    glEnableVertexAttribArray(0);
-    glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-    glVertexAttribPointer(
-        0,        // attribute. Must match the layout in the shader.
-        3,        // size
-        GL_FLOAT, // type
-        GL_FALSE, // normalized?
-        0,        // stride
-        (void*)0  // array buffer offset
-    );
-
-    // Draw the triangle! (3 indices starting at 0 -> 1 triangle)
-    glDrawArrays(GL_TRIANGLES, 0, 3);
-
-    glDisableVertexAttribArray(0);
-
     // Swap buffers
-    glfwSwapBuffers(window);
+    glfwSwapBuffers(window_);
     glfwPollEvents();
 }

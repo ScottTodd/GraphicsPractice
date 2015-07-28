@@ -25,10 +25,10 @@ public:
     bool is_running;
 
 private:
-    GLFWwindow* window;
+    GLFWwindow* window_;
 
-    std::vector<std::unique_ptr<Renderable>> scene_objects;
-    Camera camera;
+    std::vector<std::unique_ptr<Renderable>> scene_objects_;
+    Camera camera_;
 
     GLuint program_id;
     GLuint matrix_id;

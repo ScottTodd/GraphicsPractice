@@ -2,12 +2,14 @@
 #define TRIANGLE_H
 
 #include "camera.h"
+#include "material.h"
 #include "renderable.h"
 
 class Triangle : public Renderable
 {
 public:
     Triangle();
+    Triangle(Material material);
 
     ~Triangle() {}
 
