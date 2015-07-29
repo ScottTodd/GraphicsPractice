@@ -21,11 +21,17 @@ public:
     void Cleanup();
 
 private:
+    std::vector<float> vertices_;
+    std::vector<int> indices_;
+
     GLuint program_id_;
-    GLuint matrix_id_;
     GLuint vertex_array_id_;
     GLuint vertex_buffer_;
     GLuint element_buffer_;
+
+    GLuint shader_model_id_;
+    GLuint shader_view_id_;
+    GLuint shader_projection_id_;
 };
 
 #endif // MATERIAL_H

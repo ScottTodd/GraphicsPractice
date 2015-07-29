@@ -20,11 +20,15 @@ Material::Material(std::string vertex_shader_filename,
     program_id_ = LoadShaders(vertex_shader_filename.c_str(),
                              fragment_shader_filename.c_str());
 
-    // Get a handle for our "MVP" uniform
-    matrix_id_ = glGetUniformLocation(program_id_, "MVP");
+    shader_model_id_      = glGetUniformLocation(program_id_, "model");
+    shader_view_id_       = glGetUniformLocation(program_id_, "view");
+    shader_projection_id_ = glGetUniformLocation(program_id_, "projection");
 }
 
 void Material::SetMesh(std::vector<float> vertices, std::vector<int> indices) {
+    vertices_ = vertices;
+    indices_ = indices;
+
     glGenVertexArrays(1, &vertex_array_id_);
     glBindVertexArray(vertex_array_id_);
 
@@ -42,32 +46,27 @@ void Material::SetMesh(std::vector<float> vertices, std::vector<int> indices) {
 void Material::Render(Camera camera) {
     glUseProgram(program_id_);
 
-    // Send our transformation to the currently bound shader,
-    // in the "MVP" uniform
-    // Model matrix : identity matrix (model will be at the origin)
-    glm::mat4 mvp = camera.TransformModel(glm::mat4(1.0f));
-    glUniformMatrix4fv(matrix_id_, 1, GL_FALSE, &mvp[0][0]);
+    // Send in updated uniforms.
+    glUniformMatrix4fv(shader_model_id_, 1, GL_FALSE,
+                       &glm::mat4(1.0f)[0][0]);
+    glUniformMatrix4fv(shader_view_id_, 1, GL_FALSE,
+                       &camera.GetView()[0][0]);
+    glUniformMatrix4fv(shader_projection_id_, 1, GL_FALSE,
+                       &camera.GetProjection()[0][0]);
 
-    // 1st attribute buffer : vertices
+    // Bind vertex attribute.
     glEnableVertexAttribArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer_);
-    glVertexAttribPointer(
-        0,        // attribute. Must match the layout in the shader.
-        3,        // size
-        GL_FLOAT, // type
-        GL_FALSE, // normalized?
-        0,        // stride
-        (void*)0  // array buffer offset
-    );
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
-    // Draw the triangle! (3 indices starting at 0 -> 1 triangle)
-    glDrawArrays(GL_TRIANGLES, 0, 3);
+    glDrawArrays(GL_TRIANGLES, 0, (int)indices_.size());
 
     glDisableVertexAttribArray(0);
 }
 
 void Material::Cleanup() {
     glDeleteBuffers(1, &vertex_buffer_);
-    glDeleteProgram(program_id_);
+    glDeleteBuffers(1, &element_buffer_);
     glDeleteVertexArrays(1, &vertex_array_id_);
+    glDeleteProgram(program_id_);
 }

@@ -14,7 +14,8 @@ public:
            glm::vec3 target = glm::vec3(0,0,0),
            glm::vec3 up = glm::vec3(0,1,0));
 
-    glm::mat4 TransformModel(glm::mat4 model);
+    const glm::mat4 GetProjection() { return projection; }
+    const glm::mat4 GetView() { return view; }
 
 private:
     glm::mat4 projection;

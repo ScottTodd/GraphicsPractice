@@ -8,7 +8,3 @@ Camera::Camera(float fov, float aspect_ratio, float near_clip, float far_clip,
     projection = glm::perspective(fov, aspect_ratio, near_clip, far_clip);
     view = glm::lookAt(position, target, up);
 }
-
-glm::mat4 Camera::TransformModel(glm::mat4 model) {
-    return projection * view * model;
-}
