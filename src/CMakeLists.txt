@@ -68,7 +68,7 @@ add_executable(practice
     scene.cc
     camera.cc
     material.cc
-    triangle.cc
+    mesh_object.cc
 )
 target_link_libraries(practice
     ${ALL_LIBS}

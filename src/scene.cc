@@ -12,8 +12,6 @@
 
 #include <common/shader.hpp>
 
-#include "triangle.h"
-
 
 Scene::Scene() {
     is_running = false;

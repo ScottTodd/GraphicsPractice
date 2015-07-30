@@ -8,6 +8,7 @@
 
 #include "camera.h"
 #include "light.h"
+#include "mesh.h"
 
 class Material {
 public:
@@ -15,19 +16,18 @@ public:
     Material(std::string vertex_shader_filename,
              std::string fragment_shader_filename);
 
-    void SetMesh(std::vector<float> vertices, std::vector<int> indices);
+    void SetMesh(Mesh mesh);
 
     void Render(Camera camera, Light light);
     void Cleanup();
 
 private:
-    std::vector<float> vertices_;
-    std::vector<int> indices_;
+    Mesh mesh_;
 
     GLuint program_id_;
     GLuint vertex_array_id_;
     GLuint vertex_buffer_;
-    GLuint element_buffer_;
+    GLuint indices_buffer_;
 
     GLuint s_model_;
     GLuint s_view_;
