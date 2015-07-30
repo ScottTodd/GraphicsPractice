@@ -1,6 +1,9 @@
 #include <iostream>
 
+#include "material.h"
+#include "renderable.h"
 #include "scene.h"
+#include "triangle.h"
 
 int main(void) {
     Scene scene = Scene();
@@ -9,8 +12,10 @@ int main(void) {
     if (!success) { return 0; }
     std::cout << "Scene initialized.\n";
 
-    scene.InitializeObjects();
-    std::cout << "Objects inititlized.\n";
+    Material triangle_mat = Material("SimpleTransform.vertexshader",
+                                     "BasicShading.fragmentshader");
+    scene.AddObject(new Triangle(triangle_mat));
+    std::cout << "Added objects to scene.\n";
 
     do {
         scene.Update();

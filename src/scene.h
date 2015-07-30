@@ -10,14 +10,18 @@
 
 #include "camera.h"
 #include "renderable.h"
+#include "light.h"
 
 class Scene {
 public:
     Scene();
 
     bool Initialize();
-    void InitializeObjects();
     void Cleanup();
+
+    // Takes ownership by wraping in std::unique_ptr.
+    // TODO: refactor once ownership rules are better defined?
+    void AddObject(Renderable* scene_object);
 
     void Update();
     void Render();
@@ -28,6 +32,7 @@ private:
     GLFWwindow* window_;
     std::vector<std::unique_ptr<Renderable>> scene_objects_;
     Camera camera_;
+    Light light_;
 };
 
 #endif // SCENE_H

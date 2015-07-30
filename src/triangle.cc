@@ -5,6 +5,7 @@
 #include <GL/glew.h>
 
 #include "camera.h"
+#include "light.h"
 #include "material.h"
 
 Triangle::Triangle() {
@@ -29,8 +30,8 @@ void Triangle::Update() {
 
 }
 
-void Triangle::Render(Camera camera) {
-    material_.Render(camera);
+void Triangle::Render(Camera camera, Light light) {
+    material_.Render(camera, light);
 }
 
 void Triangle::Cleanup() {

@@ -2,6 +2,7 @@
 #define TRIANGLE_H
 
 #include "camera.h"
+#include "light.h"
 #include "material.h"
 #include "renderable.h"
 
@@ -14,7 +15,7 @@ public:
     ~Triangle() {}
 
     void Update();
-    void Render(Camera camera);
+    void Render(Camera camera, Light light);
     void Cleanup();
 };
 

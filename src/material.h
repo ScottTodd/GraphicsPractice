@@ -7,9 +7,9 @@
 #include <GL/glew.h>
 
 #include "camera.h"
+#include "light.h"
 
-class Material
-{
+class Material {
 public:
     Material();
     Material(std::string vertex_shader_filename,
@@ -17,7 +17,7 @@ public:
 
     void SetMesh(std::vector<float> vertices, std::vector<int> indices);
 
-    void Render(Camera camera);
+    void Render(Camera camera, Light light);
     void Cleanup();
 
 private:
@@ -29,9 +29,12 @@ private:
     GLuint vertex_buffer_;
     GLuint element_buffer_;
 
-    GLuint shader_model_id_;
-    GLuint shader_view_id_;
-    GLuint shader_projection_id_;
+    GLuint s_model_;
+    GLuint s_view_;
+    GLuint s_projection_;
+
+    GLuint s_light_position_;
+    GLuint s_light_color_;
 };
 
 #endif // MATERIAL_H

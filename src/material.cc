@@ -10,6 +10,7 @@
 #include <common/shader.hpp>
 
 #include "camera.h"
+#include "light.h"
 
 Material::Material() {
 
@@ -20,9 +21,12 @@ Material::Material(std::string vertex_shader_filename,
     program_id_ = LoadShaders(vertex_shader_filename.c_str(),
                              fragment_shader_filename.c_str());
 
-    shader_model_id_      = glGetUniformLocation(program_id_, "model");
-    shader_view_id_       = glGetUniformLocation(program_id_, "view");
-    shader_projection_id_ = glGetUniformLocation(program_id_, "projection");
+    s_model_      = glGetUniformLocation(program_id_, "model");
+    s_view_       = glGetUniformLocation(program_id_, "view");
+    s_projection_ = glGetUniformLocation(program_id_, "projection");
+
+    s_light_position_ = glGetUniformLocation(program_id_, "light.position");
+    s_light_color_    = glGetUniformLocation(program_id_, "light.color");
 }
 
 void Material::SetMesh(std::vector<float> vertices, std::vector<int> indices) {
@@ -43,16 +47,17 @@ void Material::SetMesh(std::vector<float> vertices, std::vector<int> indices) {
                  &indices[0], GL_STATIC_DRAW);
 }
 
-void Material::Render(Camera camera) {
+void Material::Render(Camera camera, Light light) {
     glUseProgram(program_id_);
 
     // Send in updated uniforms.
-    glUniformMatrix4fv(shader_model_id_, 1, GL_FALSE,
-                       &glm::mat4(1.0f)[0][0]);
-    glUniformMatrix4fv(shader_view_id_, 1, GL_FALSE,
-                       &camera.GetView()[0][0]);
-    glUniformMatrix4fv(shader_projection_id_, 1, GL_FALSE,
+    glUniformMatrix4fv(s_model_, 1, GL_FALSE, &glm::mat4(1.0f)[0][0]);
+    glUniformMatrix4fv(s_view_, 1, GL_FALSE, &camera.GetView()[0][0]);
+    glUniformMatrix4fv(s_projection_, 1, GL_FALSE,
                        &camera.GetProjection()[0][0]);
+
+    glUniform3fv(s_light_position_, 1, &light.position[0]);
+    glUniform3fv(s_light_color_, 1, &light.color[0]);
 
     // Bind vertex attribute.
     glEnableVertexAttribArray(0);

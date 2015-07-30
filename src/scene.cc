@@ -1,6 +1,7 @@
 #include "scene.h"
 
 #include <iostream>
+#include <memory>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -51,16 +52,11 @@ bool Scene::Initialize() {
     camera_ = Camera(60.0f, 4.0f / 3.0f, 0.1f, 100.0f,
                      glm::vec3(0,0,10), glm::vec3(0,0,0), glm::vec3(0,1,0));
 
+    light_ = { glm::vec3(1,3,1), glm::vec3(0,0,1) };
+
     is_running = true;
 
     return true;
-}
-
-void Scene::InitializeObjects() {
-    Material triangle_material = Material("SimpleTransform.vertexshader",
-                                          "SingleColor.fragmentshader");
-    scene_objects_.push_back(std::unique_ptr<Renderable>(new Triangle(
-                             triangle_material)));
 }
 
 void Scene::Cleanup() {
@@ -70,6 +66,10 @@ void Scene::Cleanup() {
 
     // Close OpenGL window and terminate GLFW
     glfwTerminate();
+}
+
+void Scene::AddObject(Renderable* scene_object) {
+    scene_objects_.push_back(std::unique_ptr<Renderable>(scene_object));
 }
 
 void Scene::Update() {
@@ -87,7 +87,7 @@ void Scene::Render() {
     glClear(GL_COLOR_BUFFER_BIT);
 
     for (int i = 0; i < scene_objects_.size(); ++i) {
-        scene_objects_[i]->Render(camera_);
+        scene_objects_[i]->Render(camera_, light_);
     }
 
     // Swap buffers
