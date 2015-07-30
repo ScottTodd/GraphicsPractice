@@ -12,7 +12,7 @@ public:
     virtual ~Renderable() {}
 
     virtual void Update() = 0;
-    virtual void Render(Camera camera, Light light) = 0;
+    virtual void Render(const Camera &camera, const Light &light) const = 0;
     virtual void Cleanup() = 0;
 
 protected:

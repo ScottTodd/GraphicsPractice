@@ -11,12 +11,12 @@ class MeshObject : public Renderable
 {
 public:
     MeshObject();
-    MeshObject(Mesh mesh, Material material);
+    MeshObject(Mesh &mesh, Material &material);
 
     ~MeshObject() {}
 
     void Update();
-    void Render(Camera camera, Light light);
+    void Render(const Camera &camera, const Light &light) const;
     void Cleanup();
 
 private:

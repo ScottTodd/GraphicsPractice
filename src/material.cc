@@ -30,7 +30,7 @@ Material::Material(std::string vertex_shader_filename,
     s_light_color_    = glGetUniformLocation(program_id_, "light.color");
 }
 
-void Material::SetMesh(Mesh mesh) {
+void Material::SetMesh(Mesh &mesh) {
     mesh_ = mesh;
 
     // TODO: Delete buffers and vertex arrays if they already exist.
@@ -49,7 +49,7 @@ void Material::SetMesh(Mesh mesh) {
                  &mesh.indices[0], GL_STATIC_DRAW);
 }
 
-void Material::Render(Camera camera, Light light) {
+void Material::Render(Camera camera, Light light) const {
     glUseProgram(program_id_);
 
     // Send in updated uniforms.

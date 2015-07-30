@@ -16,9 +16,9 @@ public:
     Material(std::string vertex_shader_filename,
              std::string fragment_shader_filename);
 
-    void SetMesh(Mesh mesh);
+    void SetMesh(Mesh &mesh);
 
-    void Render(Camera camera, Light light);
+    void Render(Camera camera, Light light) const;
     void Cleanup();
 
 private:

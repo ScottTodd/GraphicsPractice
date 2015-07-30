@@ -13,7 +13,7 @@ MeshObject::MeshObject() {
 
 }
 
-MeshObject::MeshObject(Mesh mesh, Material material) {
+MeshObject::MeshObject(Mesh &mesh, Material &material) {
     mesh_ = mesh;
     material_ = material;
 
@@ -24,7 +24,7 @@ void MeshObject::Update() {
 
 }
 
-void MeshObject::Render(Camera camera, Light light) {
+void MeshObject::Render(const Camera &camera, const Light &light) const {
     material_.Render(camera, light);
 }
 
