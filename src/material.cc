@@ -49,11 +49,12 @@ void Material::SetMesh(Mesh &mesh) {
                  &mesh.indices[0], GL_STATIC_DRAW);
 }
 
-void Material::Render(Camera camera, Light light) const {
+void Material::Render(Camera camera, Light light,
+                      glm::mat4 model_transform) const {
     glUseProgram(program_id_);
 
     // Send in updated uniforms.
-    glUniformMatrix4fv(s_model_, 1, GL_FALSE, &glm::mat4(1.0f)[0][0]);
+    glUniformMatrix4fv(s_model_, 1, GL_FALSE, &model_transform[0][0]);
     glUniformMatrix4fv(s_view_, 1, GL_FALSE, &camera.GetView()[0][0]);
     glUniformMatrix4fv(s_projection_, 1, GL_FALSE,
                        &camera.GetProjection()[0][0]);
@@ -66,7 +67,8 @@ void Material::Render(Camera camera, Light light) const {
     glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer_);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
-    glDrawArrays(GL_TRIANGLES, 0, (int)mesh_.indices.size());
+    glDrawElements(GL_TRIANGLES, (int)mesh_.indices.size(), GL_UNSIGNED_INT,
+                   (void*)0);
 
     glDisableVertexAttribArray(0);
 }

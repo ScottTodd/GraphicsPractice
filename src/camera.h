@@ -3,8 +3,7 @@
 
 #include <glm/glm.hpp>
 
-class Camera
-{
+class Camera {
 public:
     Camera(float fov = 60.0f,
            float aspect_ratio = 1.33333f,

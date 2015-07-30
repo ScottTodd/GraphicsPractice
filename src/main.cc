@@ -14,19 +14,25 @@ int main(void) {
     if (!success) { return 0; }
     std::cout << "Scene initialized.\n";
 
-    Material triangle_mat = Material("SimpleTransform.vertexshader",
-                                     "BasicShading.fragmentshader");
+    Material tetrahedron_mat = Material("SimpleTransform.vertexshader",
+                                        "BasicShading.fragmentshader");
 
-    std::vector<float> triangle_vertices = {
-        -1.0f, -1.0f, 0.0f,
-         1.0f, -1.0f, 0.0f,
-         0.0f,  1.0f, 0.0f
+    std::vector<float> tetrahedron_vertices = {
+        -1.0f, -0.707f,  0.707f,
+         1.0f, -0.707f,  0.707f,
+         0.0f, -0.707f, -0.707f,
+         0.0f,  0.707f,  0.0f
     };
-    std::vector<int> triangle_indices = {0, 1, 2};
-    Mesh triangle_mesh = {triangle_vertices, triangle_indices};
+    std::vector<unsigned int> tetrahedron_indices = {
+        0, 3, 1,
+        1, 3, 2,
+        2, 3, 0,
+        0, 2, 1
+    };
+    Mesh tetrahedron_mesh = {tetrahedron_vertices, tetrahedron_indices};
 
-    MeshObject* triangle = new MeshObject(triangle_mesh, triangle_mat);
-    scene.AddObject(triangle);
+    MeshObject* tetrahedron = new MeshObject(tetrahedron_mesh, tetrahedron_mat);
+    scene.AddObject(tetrahedron);
 
     std::cout << "Added objects to scene.\n";
 

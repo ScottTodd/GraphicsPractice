@@ -12,7 +12,6 @@
 
 #include <common/shader.hpp>
 
-
 Scene::Scene() {
     is_running = false;
 }
@@ -81,7 +80,8 @@ void Scene::Update() {
 }
 
 void Scene::Render() {
-    // Clear the screen
+    // Clear the screen.
+    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     glClear(GL_COLOR_BUFFER_BIT);
 
     for (int i = 0; i < scene_objects_.size(); ++i) {

@@ -7,7 +7,7 @@
 
 struct Mesh {
     std::vector<float> vertices;
-    std::vector<int> indices;
+    std::vector<unsigned int> indices;
 };
 
 #endif // MESH_H

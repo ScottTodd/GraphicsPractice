@@ -5,6 +5,7 @@
 #include <vector>
 
 #include <GL/glew.h>
+#include <glm/glm.hpp>
 
 #include "camera.h"
 #include "light.h"
@@ -18,7 +19,7 @@ public:
 
     void SetMesh(Mesh &mesh);
 
-    void Render(Camera camera, Light light) const;
+    void Render(Camera camera, Light light, glm::mat4 model_transform) const;
     void Cleanup();
 
 private:
