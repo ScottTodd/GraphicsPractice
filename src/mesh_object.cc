@@ -41,8 +41,8 @@ void MeshObject::Update() {
     z_ += -0.0003f;
     rotation_ = glm::quat(glm::vec3(x_, y_, z_));
 
-    s_ += 0.0001f;
-    scale_ = glm::scale(s_, s_, s_);
+    // s_ += 0.0001f;
+    // scale_ = glm::scale(s_, s_, s_);
 }
 
 void MeshObject::Render(const Camera &camera, const Light &light) const {

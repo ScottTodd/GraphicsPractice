@@ -49,7 +49,7 @@ bool Scene::Initialize() {
     camera_ = Camera(60.0f, 4.0f / 3.0f, 0.1f, 100.0f,
                      glm::vec3(0,0,10), glm::vec3(0,0,0), glm::vec3(0,1,0));
 
-    light_ = { glm::vec3(1,3,1), glm::vec3(0,0,1) };
+    light_ = { glm::vec3(1,3,1), glm::vec3(0,0,1), 5 };
 
     is_running = true;
 
