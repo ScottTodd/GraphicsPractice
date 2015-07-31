@@ -1,17 +1,5 @@
 #include "scene.h"
 
-#include <iostream>
-#include <memory>
-#include <stdio.h>
-#include <stdlib.h>
-
-#include <GL/glew.h>
-#include <glfw3.h>
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-
-#include <common/shader.hpp>
-
 Scene::Scene() {
     is_running = false;
 }

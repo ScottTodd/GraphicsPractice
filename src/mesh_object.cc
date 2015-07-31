@@ -1,20 +1,5 @@
 #include "mesh_object.h"
 
-#include <vector>
-
-#include <GL/glew.h>
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/quaternion.hpp>
-#include <glm/gtx/euler_angles.hpp>
-#include <glm/gtx/quaternion.hpp>
-#include <glm/gtx/transform.hpp>
-
-#include "camera.h"
-#include "light.h"
-#include "material.h"
-#include "mesh.h"
-
 MeshObject::MeshObject() {
 
 }

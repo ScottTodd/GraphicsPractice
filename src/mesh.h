@@ -3,8 +3,6 @@
 
 #include <vector>
 
-#include <glm/glm.hpp>
-
 // TODO: Convert to class, add CalculateNormals function/make normals optional.
 
 struct Mesh {

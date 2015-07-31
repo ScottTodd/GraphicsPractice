@@ -1,17 +1,6 @@
 #include "material.h"
 
-#include <string>
-#include <vector>
-
-#include <GL/glew.h>
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-
 #include <common/shader.hpp>
-
-#include "camera.h"
-#include "light.h"
-#include "mesh.h"
 
 Material::Material() {
 
