@@ -4,7 +4,6 @@
 #include "component.h"
 #include "material.h"
 #include "mesh.h"
-#include "scene_object.h"
 
 class MeshRenderer : public Component {
 public:
@@ -20,10 +19,6 @@ public:
 private:
     Mesh mesh_;
     Material material_;
-
-    float x_;
-    float y_;
-    float z_;
 };
 
 #endif // MESH_RENDERER_H

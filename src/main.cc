@@ -6,6 +6,7 @@
 #include "material.h"
 #include "mesh.h"
 #include "mesh_renderer.h"
+#include "rotate.h"
 #include "scene_object.h"
 #include "scene.h"
 
@@ -48,6 +49,8 @@ int main(void) {
     MeshRenderer* tetrahedron_renderer = new MeshRenderer(tetrahedron_mesh,
                                                           tetrahedron_mat);
     tetrahedron->AddComponent(tetrahedron_renderer);
+
+    tetrahedron->AddComponent(new Rotate());
 
     tetrahedron->transform.Translate(0, -1, 0);
     scene.AddObject(tetrahedron);

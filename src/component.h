@@ -2,7 +2,6 @@
 #define COMPONENT_H
 
 class SceneObject;
-class Scene;
 
 class Component {
 public:
