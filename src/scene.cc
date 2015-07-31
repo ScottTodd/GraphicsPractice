@@ -39,6 +39,8 @@ bool Scene::Initialize() {
 
     light_ = { glm::vec3(0,3,0), glm::vec3(0,0,1), 5 };
 
+    last_time_ = glfwGetTime();
+
     is_running = true;
 
     return true;
@@ -58,8 +60,12 @@ void Scene::AddObject(Renderable* scene_object) {
 }
 
 void Scene::Update() {
+    double current_time = glfwGetTime();
+    float delta_time = float(current_time - last_time_);
+    last_time_ = current_time;
+
     for (int i = 0; i < scene_objects_.size(); ++i) {
-        scene_objects_[i]->Update();
+        scene_objects_[i]->Update(delta_time);
     }
 
     // Check if the ESC key was pressed or the window was closed

@@ -19,12 +19,13 @@ public:
 
     ~MeshObject() {}
 
-    void Update();
+    void Update(float delta_time);
     void Render(const Camera &camera, const Light &light) const;
     void Cleanup();
 
 private:
     Mesh mesh_;
+
     glm::mat4 translation_;
     glm::quat rotation_;
     glm::mat4 scale_;

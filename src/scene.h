@@ -33,6 +33,8 @@ private:
     std::vector<std::unique_ptr<Renderable>> scene_objects_;
     Camera camera_;
     Light light_;
+
+    double last_time_;
 };
 
 #endif // SCENE_H

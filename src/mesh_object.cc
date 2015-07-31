@@ -20,10 +20,10 @@ MeshObject::MeshObject(Mesh &mesh, Material &material) {
     s_ = 1;
 }
 
-void MeshObject::Update() {
-    x_ +=  0.0002f;
-    y_ +=  0.00003f;
-    z_ += -0.0003f;
+void MeshObject::Update(float delta_time) {
+    // x_ +=  1.0f * delta_time;
+    y_ +=  0.8f * delta_time;
+    // z_ += -0.1f * delta_time;
     rotation_ = glm::quat(glm::vec3(x_, y_, z_));
 
     // s_ += 0.0001f;
