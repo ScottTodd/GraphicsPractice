@@ -50,7 +50,7 @@ int main(void) {
                                                           tetrahedron_mat);
     tetrahedron->AddComponent(tetrahedron_renderer);
 
-    tetrahedron->AddComponent(new Rotate());
+    tetrahedron->AddComponent(new Rotate(0.0f, 0.8f, 0.0f));
 
     tetrahedron->transform.Translate(0, -1, 0);
     scene.AddObject(tetrahedron);

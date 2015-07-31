@@ -2,13 +2,14 @@
 #define ROTATE_H
 
 #include <glm/glm.hpp>
-#include <glm/gtc/quaternion.hpp>
 
 #include "component.h"
 
 class Rotate : public Component {
 public:
     Rotate();
+    Rotate(glm::vec3 axis_speeds);
+    Rotate(float x, float y, float z);
 
     ~Rotate() {}
 
@@ -16,10 +17,7 @@ public:
     void Render() const {}
     void Cleanup();
 
-private:
-    float x_;
-    float y_;
-    float z_;
+    glm::vec3 axis_speeds;
 };
 
 #endif // ROTATE_H

@@ -1,20 +1,25 @@
 #include "rotate.h"
 
-#include <glm/glm.hpp>
+#include <glm/gtc/quaternion.hpp>
 
 #include "scene_object.h"
 
 Rotate::Rotate() {
-    x_ = 0;
-    y_ = 0;
-    z_ = 0;
+    axis_speeds = glm::vec3(0, 0, 0);
+}
+
+Rotate::Rotate(glm::vec3 axis_speeds) {
+    this->axis_speeds = axis_speeds;
+}
+
+Rotate::Rotate(float x, float y, float z) {
+    axis_speeds = glm::vec3(x, y, z);
 }
 
 void Rotate::Update(float delta_time) {
-    // x_ +=  1.0f * delta_time;
-    y_ +=  0.8f * delta_time;
-    // z_ += -0.1f * delta_time;
-    scene_object->transform.SetRotation(x_, y_, z_);
+    glm::quat rotation = glm::quat(axis_speeds * delta_time);
+    scene_object->transform.rotation = (scene_object->transform.rotation *
+                                        rotation);
 }
 
 void Rotate::Cleanup() {
