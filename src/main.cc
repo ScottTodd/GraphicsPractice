@@ -20,16 +20,16 @@ int main(void) {
                                         "BasicShading.fragmentshader");
 
     std::vector<float> tetrahedron_vertices = {
-        -1.0f, -0.707f,  0.707f,
-         1.0f, -0.707f,  0.707f,
-         0.0f, -0.707f, -0.707f,
-         0.0f,  0.707f,  0.0f
+        -1.0f,  0.0f, -0.707f,
+         1.0f,  0.0f, -0.707f,
+         0.0f,  1.0f,  0.707f,
+         0.0f, -1.0f,  0.707f
     };
-    std::vector<glm::vec3> tetrahedron_normals = {
-        glm::vec3(-0.577f, -0.577f,  0.577f),
-        glm::vec3( 0.577f, -0.577f,  0.577f),
-        glm::vec3( 0.0f  , -0.577f, -0.577f),
-        glm::vec3( 0.0f  ,  1.0f  ,  0.0f)
+    std::vector<float> tetrahedron_normals = {
+        -0.707f,  0.0f  , -0.707f,
+         0.707f,  0.0f  , -0.707f,
+         0.0f  ,  0.707f, 0.707f,
+         0.0f  , -0.707f, 0.707f
     };
     std::vector<unsigned int> tetrahedron_indices = {
         0, 3, 1,

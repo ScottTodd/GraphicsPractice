@@ -47,9 +47,9 @@ bool Scene::Initialize() {
     glfwSetInputMode(window_, GLFW_STICKY_KEYS, GL_TRUE);
 
     camera_ = Camera(60.0f, 4.0f / 3.0f, 0.1f, 100.0f,
-                     glm::vec3(0,0,10), glm::vec3(0,0,0), glm::vec3(0,1,0));
+                     glm::vec3(0,0,5), glm::vec3(0,0,0), glm::vec3(0,1,0));
 
-    light_ = { glm::vec3(1,3,1), glm::vec3(0,0,1), 5 };
+    light_ = { glm::vec3(0,3,0), glm::vec3(0,0,1), 5 };
 
     is_running = true;
 
@@ -82,7 +82,10 @@ void Scene::Update() {
 void Scene::Render() {
     // Clear the screen.
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LESS);
 
     for (int i = 0; i < scene_objects_.size(); ++i) {
         scene_objects_[i]->Render(camera_, light_);

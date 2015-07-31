@@ -26,7 +26,7 @@ MeshObject::MeshObject(Mesh &mesh, Material &material) {
     material_.SetMesh(mesh_);
 
     translation_ = glm::translate(0, 0, 0);
-    rotation_ = glm::quat(glm::vec3(10, 10, 0));
+    rotation_ = glm::quat(glm::vec3(0, 0, 0));
     scale_ = glm::scale(1, 1, 1);
 
     x_ = 0;

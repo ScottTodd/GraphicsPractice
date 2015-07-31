@@ -46,12 +46,13 @@ void Material::SetMesh(Mesh &mesh) {
 
     glGenBuffers(1, &b_normal_);
     glBindBuffer(GL_ARRAY_BUFFER, b_normal_);
-    glBufferData(GL_ARRAY_BUFFER, mesh.normals.size() * sizeof(glm::vec3),
+    glBufferData(GL_ARRAY_BUFFER, mesh.normals.size() * sizeof(float),
                  &mesh.normals[0], GL_STATIC_DRAW);
 
     glGenBuffers(1, &b_indices_);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, b_indices_);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, mesh.indices.size() * sizeof(int),
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, mesh.indices.size() *
+                 sizeof(unsigned int),
                  &mesh.indices[0], GL_STATIC_DRAW);
 }
 
