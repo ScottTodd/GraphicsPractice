@@ -3,10 +3,10 @@
 
 #include <glm/glm.hpp>
 
+#include "components/mesh_renderer.h"
+#include "components/rotate.h"
 #include "material.h"
 #include "mesh.h"
-#include "mesh_renderer.h"
-#include "rotate.h"
 #include "scene_object.h"
 #include "scene.h"
 
@@ -21,8 +21,8 @@ int main(void) {
 
 
 
-    Material tetrahedron_mat = Material("BasicShading.vertexshader",
-                                        "BasicShading.fragmentshader");
+    Material tetrahedron_mat = Material("shaders/BasicShading.vertexshader",
+                                        "shaders/BasicShading.fragmentshader");
 
     std::vector<float> tetrahedron_vertices = {
         -1.0f,  0.0f, -0.707f,

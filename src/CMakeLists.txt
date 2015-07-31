@@ -65,11 +65,11 @@ add_executable(practice
     common/objloader.hpp
     common/vboindexer.cpp
     common/vboindexer.hpp
+    components/mesh_renderer.cc
+    components/rotate.cc
     scene.cc
     camera.cc
     material.cc
-    mesh_renderer.cc
-    rotate.cc
     scene_object.cc
     transform.cc
 )
