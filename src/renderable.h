@@ -5,8 +5,7 @@
 #include "light.h"
 #include "material.h"
 
-class Renderable
-{
+class Renderable {
 public:
     Renderable() {}
     virtual ~Renderable() {}

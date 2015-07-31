@@ -1,8 +1,8 @@
 #ifndef SCENE_H
 #define SCENE_H
 
-#include <vector>
 #include <memory>
+#include <vector>
 
 #include <GL/glew.h>
 #include <glfw3.h>
@@ -28,11 +28,12 @@ public:
 
     bool is_running;
 
+    Camera camera;
+    Light light;
+
 private:
     GLFWwindow* window_;
     std::vector<std::unique_ptr<Renderable>> scene_objects_;
-    Camera camera_;
-    Light light_;
 
     double last_time_;
 };
