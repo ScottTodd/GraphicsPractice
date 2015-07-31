@@ -5,8 +5,9 @@
 
 #include "material.h"
 #include "mesh.h"
-#include "mesh_object.h"
-#include "renderable.h"
+#include "mesh_renderer.h"
+#include "rotate.h"
+#include "scene_object.h"
 #include "scene.h"
 
 int main(void) {
@@ -15,6 +16,10 @@ int main(void) {
     bool success = scene.Initialize();
     if (!success) { return 0; }
     std::cout << "Scene initialized.\n";
+
+    SceneObject* tetrahedron = new SceneObject();
+
+
 
     Material tetrahedron_mat = Material("BasicShading.vertexshader",
                                         "BasicShading.fragmentshader");
@@ -41,7 +46,12 @@ int main(void) {
                              tetrahedron_normals,
                              tetrahedron_indices};
 
-    MeshObject* tetrahedron = new MeshObject(tetrahedron_mesh, tetrahedron_mat);
+    MeshRenderer* tetrahedron_renderer = new MeshRenderer(tetrahedron_mesh,
+                                                          tetrahedron_mat);
+    tetrahedron->AddComponent(tetrahedron_renderer);
+
+    tetrahedron->AddComponent(new Rotate(0.0f, 0.8f, 0.0f));
+
     tetrahedron->transform.Translate(0, -1, 0);
     scene.AddObject(tetrahedron);
 

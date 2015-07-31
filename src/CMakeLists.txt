@@ -68,7 +68,9 @@ add_executable(practice
     scene.cc
     camera.cc
     material.cc
-    mesh_object.cc
+    mesh_renderer.cc
+    rotate.cc
+    scene_object.cc
     transform.cc
 )
 target_link_libraries(practice

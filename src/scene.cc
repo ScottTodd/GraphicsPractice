@@ -34,10 +34,10 @@ bool Scene::Initialize() {
     // Ensure we can capture the escape key to exit.
     glfwSetInputMode(window_, GLFW_STICKY_KEYS, GL_TRUE);
 
-    camera_ = Camera(60.0f, 4.0f / 3.0f, 0.1f, 100.0f,
-                     glm::vec3(0,0,5), glm::vec3(0,0,0), glm::vec3(0,1,0));
+    camera = Camera(60.0f, 4.0f / 3.0f, 0.1f, 100.0f,
+                    glm::vec3(0,0,5), glm::vec3(0,0,0), glm::vec3(0,1,0));
 
-    light_ = { glm::vec3(0,3,0), glm::vec3(0,0,1), 5 };
+    light = { glm::vec3(0,3,0), glm::vec3(0,0,1), 5 };
 
     last_time_ = glfwGetTime();
 
@@ -55,8 +55,9 @@ void Scene::Cleanup() {
     glfwTerminate();
 }
 
-void Scene::AddObject(Renderable* scene_object) {
-    scene_objects_.push_back(std::unique_ptr<Renderable>(scene_object));
+void Scene::AddObject(SceneObject* scene_object) {
+    scene_objects_.push_back(std::unique_ptr<SceneObject>(scene_object));
+    scene_object->scene = this;
 }
 
 void Scene::Update() {
@@ -82,7 +83,7 @@ void Scene::Render() {
     glDepthFunc(GL_LESS);
 
     for (int i = 0; i < scene_objects_.size(); ++i) {
-        scene_objects_[i]->Render(camera_, light_);
+        scene_objects_[i]->Render();
     }
 
     // Swap buffers
