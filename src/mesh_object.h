@@ -11,6 +11,7 @@
 #include "material.h"
 #include "mesh.h"
 #include "renderable.h"
+#include "transform.h"
 
 class MeshObject : public Renderable {
 public:
@@ -23,12 +24,10 @@ public:
     void Render(const Camera &camera, const Light &light) const;
     void Cleanup();
 
+    Transform transform;
+
 private:
     Mesh mesh_;
-
-    glm::mat4 translation_;
-    glm::quat rotation_;
-    glm::mat4 scale_;
 
     float x_;
     float y_;
