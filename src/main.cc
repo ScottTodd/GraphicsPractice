@@ -42,6 +42,7 @@ int main(void) {
                              tetrahedron_indices};
 
     MeshObject* tetrahedron = new MeshObject(tetrahedron_mesh, tetrahedron_mat);
+    tetrahedron->transform.Translate(0, -1, 0);
     scene.AddObject(tetrahedron);
 
     std::cout << "Added objects to scene.\n";
