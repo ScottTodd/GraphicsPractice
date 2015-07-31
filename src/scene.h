@@ -9,8 +9,8 @@
 #include <glm/glm.hpp>
 
 #include "camera.h"
-#include "renderable.h"
 #include "light.h"
+#include "scene_object.h"
 
 class Scene {
 public:
@@ -21,7 +21,7 @@ public:
 
     // Takes ownership by wraping in std::unique_ptr.
     // TODO: refactor once ownership rules are better defined?
-    void AddObject(Renderable* scene_object);
+    void AddObject(SceneObject* scene_object);
 
     void Update();
     void Render();
@@ -33,7 +33,7 @@ public:
 
 private:
     GLFWwindow* window_;
-    std::vector<std::unique_ptr<Renderable>> scene_objects_;
+    std::vector<std::unique_ptr<SceneObject>> scene_objects_;
 
     double last_time_;
 };

@@ -68,7 +68,7 @@ add_executable(practice
     scene.cc
     camera.cc
     material.cc
-    mesh_object.cc
+    mesh_renderer.cc
     scene_object.cc
     transform.cc
 )

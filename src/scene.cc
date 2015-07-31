@@ -55,8 +55,9 @@ void Scene::Cleanup() {
     glfwTerminate();
 }
 
-void Scene::AddObject(Renderable* scene_object) {
-    scene_objects_.push_back(std::unique_ptr<Renderable>(scene_object));
+void Scene::AddObject(SceneObject* scene_object) {
+    scene_objects_.push_back(std::unique_ptr<SceneObject>(scene_object));
+    scene_object->scene = this;
 }
 
 void Scene::Update() {
@@ -82,7 +83,7 @@ void Scene::Render() {
     glDepthFunc(GL_LESS);
 
     for (int i = 0; i < scene_objects_.size(); ++i) {
-        scene_objects_[i]->Render(camera, light);
+        scene_objects_[i]->Render();
     }
 
     // Swap buffers
