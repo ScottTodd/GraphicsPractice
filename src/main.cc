@@ -41,10 +41,10 @@ int main(void) {
              0.0f  , -0.707f, 0.707f
         };
         std::vector<unsigned int> tetrahedron_indices = {
-            0, 3, 1,
-            1, 3, 2,
-            2, 3, 0,
-            0, 2, 1
+            0, 2, 1,
+            0, 3, 2,
+            2, 3, 1,
+            0, 1, 3
         };
         Mesh tetrahedron_mesh = {tetrahedron_vertices,
                                  tetrahedron_normals,
@@ -58,7 +58,6 @@ int main(void) {
                                              rand() % 2 - 1.0f,
                                              rand() % 2 - 1.0f));
 
-        tetrahedron->transform.Translate(0, -1, 0);
         scene.AddObject(tetrahedron);
     }
 
