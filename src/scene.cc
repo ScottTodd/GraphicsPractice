@@ -1,5 +1,7 @@
 #include "scene.h"
 
+#include <iostream>
+
 Scene::Scene() {
     is_running = false;
 }
@@ -40,6 +42,8 @@ bool Scene::Initialize() {
     light = { glm::vec3(0,3,0), glm::vec3(0,0,1), 5 };
 
     last_time_ = glfwGetTime();
+    num_frames_ = 0;
+    last_fps_print_time_ = last_time_;
 
     is_running = true;
 
@@ -62,8 +66,18 @@ void Scene::AddObject(SceneObject* scene_object) {
 
 void Scene::Update() {
     double current_time = glfwGetTime();
+    // Update delta_time.
     float delta_time = float(current_time - last_time_);
     last_time_ = current_time;
+
+    // Display FPS.
+    num_frames_++;
+    if (current_time > last_fps_print_time_ + 1) {
+        double fps = num_frames_ / (current_time - last_fps_print_time_);
+        std::cout << "FPS: " << fps << std::endl;
+        num_frames_ = 0;
+        last_fps_print_time_ = current_time;
+    }
 
     for (int i = 0; i < scene_objects_.size(); ++i) {
         scene_objects_[i]->Update(delta_time);

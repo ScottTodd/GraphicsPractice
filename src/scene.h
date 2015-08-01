@@ -35,7 +35,11 @@ private:
     GLFWwindow* window_;
     std::vector<std::unique_ptr<SceneObject>> scene_objects_;
 
+    // Used for delta_time.
     double last_time_;
+    // Used for FPS tracking.
+    double last_fps_print_time_;
+    int num_frames_;
 };
 
 #endif // SCENE_H
