@@ -10,6 +10,7 @@
 #include "mesh.h"
 #include "scene_object.h"
 #include "scene.h"
+#include "texture.h"
 
 int main(void) {
     Scene scene = Scene();
@@ -17,6 +18,9 @@ int main(void) {
     bool success = scene.Initialize();
     if (!success) { return 0; }
     std::cout << "Scene initialized.\n";
+
+    Texture texture;
+    texture.Load("resources/UVCheckerMaps/UVCheckerMap01-512.png");
 
     for (int i = 0; i < 10; ++i) {
         SceneObject* tetrahedron = new SceneObject();
