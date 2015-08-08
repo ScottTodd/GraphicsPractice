@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-#include <lodepng.cpp>
+#include <lodepng.h>
 
 Texture::Texture() {
 

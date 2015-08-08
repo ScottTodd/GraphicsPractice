@@ -31,6 +31,8 @@ endif(INCLUDE_DISTRIB)
 
 
 
+add_library(lodepng external/lodepng/lodepng.cpp)
+
 include_directories(
     external/AntTweakBar-1.16/include/
     external/glfw-3.0.3/include/GLFW/
@@ -46,6 +48,7 @@ set(ALL_LIBS
     ${OPENGL_LIBRARY}
     GLFW_303
     GLEW_190
+    lodepng
 )
 
 add_definitions(
@@ -55,6 +58,7 @@ add_definitions(
     -DGLEW_STATIC
     -D_CRT_SECURE_NO_WARNINGS
 )
+
 
 add_executable(practice
     main.cc
