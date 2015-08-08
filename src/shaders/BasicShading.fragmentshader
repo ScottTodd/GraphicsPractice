@@ -7,11 +7,14 @@ struct Light {
 };
 
 uniform Light light;
+uniform sampler2D texture_albedo;
 
 in vec3 position_worldspace;
+in vec3 position_cameraspace;
 in vec3 normal_cameraspace;
 in vec3 eye_direction_cameraspace;
 in vec3 light_direction_cameraspace;
+in vec2 uv;
 
 out vec3 color;
 
@@ -29,10 +32,13 @@ void main() {
                                              normal_cameraspace)),
                                  0, 1);
 
-    vec3 ambient = vec3(0.1, 0.1, 0.1);
+    vec3 ambient = vec3(0.05, 0.05, 0.05);
     vec3 diffuse = light.color * light.power * normal_to_light /
                    (distance_to_light * distance_to_light);
     vec3 specular = light.color * light.power * pow(eye_to_reflect, 5) /
                    (distance_to_light * distance_to_light);
-    color = ambient + diffuse + specular;
+    vec3 light_color = ambient + diffuse + specular;
+
+    vec3 albedo_color = texture(texture_albedo, uv).rgb;
+    color = light_color * albedo_color;
 }
