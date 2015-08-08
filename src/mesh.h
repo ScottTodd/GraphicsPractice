@@ -8,6 +8,7 @@
 struct Mesh {
     std::vector<float> vertices;
     std::vector<float> normals;
+    std::vector<float> uvs;
     std::vector<unsigned int> indices;
 };
 

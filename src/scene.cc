@@ -39,7 +39,7 @@ bool Scene::Initialize() {
     camera = Camera(60.0f, 4.0f / 3.0f, 0.1f, 100.0f,
                     glm::vec3(0,0,5), glm::vec3(0,0,0), glm::vec3(0,1,0));
 
-    light = { glm::vec3(0,3,0), glm::vec3(0,0,1), 5 };
+    light = { glm::vec3(0,0,0), glm::vec3(0.9,0.9,0.9), 10 };
 
     last_time_ = glfwGetTime();
     num_frames_ = 0;

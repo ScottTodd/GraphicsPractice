@@ -13,11 +13,14 @@ uniform Light light;
 
 layout(location = 0) in vec3 position; // modelspace
 layout(location = 1) in vec3 normal; // modelspace
+layout(location = 2) in vec2 vertex_uv;
 
 out vec3 position_worldspace;
+out vec3 position_cameraspace;
 out vec3 normal_cameraspace;
 out vec3 eye_direction_cameraspace;
 out vec3 light_direction_cameraspace;
+out vec2 uv;
 
 void main() {
     mat4 mvp = projection * view * model;
@@ -28,10 +31,12 @@ void main() {
 
     normal_cameraspace = normalize((view * model * vec4(normal, 0)).xyz);
 
-    vec3 position_cameraspace = (view * model * vec4(position, 1)).xyz;
+    position_cameraspace = (view * model * vec4(position, 1)).xyz;
     eye_direction_cameraspace = normalize(vec3(0,0,0) - position_cameraspace);
 
     vec3 light_position_cameraspace = (view * vec4(light.position, 1)).xyz;
     light_direction_cameraspace = normalize(light_position_cameraspace +
                                             eye_direction_cameraspace);
+
+    uv = vertex_uv;
 }
