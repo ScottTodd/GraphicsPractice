@@ -28,7 +28,7 @@
 *.app
 
 # Folders and other exclusions
-build/
+*build/
 temp/
 bin/
 out/
