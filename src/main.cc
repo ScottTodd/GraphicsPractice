@@ -1,3 +1,4 @@
+#include <ctime>
 #include <iostream>
 #include <stdlib.h>
 #include <vector>
@@ -182,14 +183,16 @@ void AddTetrahedron(Scene &scene) {
 }
 
 int main(void) {
+    std::srand((unsigned int)std::time(0)); // Seed RNG.
+
     Scene scene = Scene();
 
     bool success = scene.Initialize();
     if (!success) { return 0; }
     std::cout << "Scene initialized.\n";
 
-    for (int i = 0; i < 10; ++i) {
-        // AddCube(scene);
+    for (int i = 0; i < 5; ++i) {
+        AddCube(scene);
         AddTetrahedron(scene);
     }
 
